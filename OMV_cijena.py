@@ -2,7 +2,6 @@ import sys
 import EUR_2_HRK
 import fetch
 from lxml.cssselect import CSSSelector #nocov
-from lxml import etree
 
 try:
     currencycode = sys.argv[1]

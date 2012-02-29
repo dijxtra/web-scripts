@@ -15,12 +15,16 @@ import urllib             # For BasicHTTPAuthentication
 import feedparser         # For parsing the feed
 import re
 
-uname = sys.argv[1]
-
-_URL = "http://www.conquerclub.com/rss.php?username=" + uname
-
 def auth():
     '''The method to do HTTPBasicAuthentication'''
+
+    if len(sys.argv) < 2:
+        print "Usage: python " + sys.argv[0] + " username"
+        exit()
+
+    uname = sys.argv[1]
+    _URL = "http://www.conquerclub.com/rss.php?username=" + uname
+
     opener = urllib.FancyURLopener()
     f = opener.open(_URL)
     feed = f.read()

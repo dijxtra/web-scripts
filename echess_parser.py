@@ -29,6 +29,12 @@ def parseRSS(URL):
 
 
 if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print "Usage: python " + sys.argv[0] + " username"
+        exit()
+
     uname = sys.argv[1]
+    _URL = "http://www.conquerclub.com/rss.php?username=" + uname
+
     URL = "http://www.chess.com/rss/echess/" + uname
     parseRSS(URL)

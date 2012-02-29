@@ -15,7 +15,6 @@ import os.path
 import datetime
 import urllib             # For BasicHTTPAuthentication
 import feedparser         # For parsing the feed
-from textwrap import wrap
 
 _URL = "https://mail.google.com/gmail/feed/atom"
 maxlen = 1
@@ -23,6 +22,10 @@ maxlen = 1
 
 def auth():
     '''The method to do HTTPBasicAuthentication'''
+    if len(sys.argv) < 3:
+        print "Usage: python " + sys.argv[0] + " username password"
+        exit()
+
     uname = sys.argv[1]
     password = sys.argv[2]
     urllib.FancyURLopener.prompt_user_passwd = lambda self, host, realm: (uname, password)

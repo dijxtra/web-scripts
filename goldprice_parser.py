@@ -1,21 +1,24 @@
 import sys
 import urllib
 from xml.dom import minidom
-import re
 
-currencycode = sys.argv[1]
-
-_URL = "http://dgcsc.org/goldprices.xml"
 
 def auth():
     '''The method to do HTTPBasicAuthentication'''
+    if len(sys.argv) < 2:
+        print "Usage: python " + sys.argv[0] + " currencycode"
+        exit()
+
+    currencycode = sys.argv[1]
+    _URL = "http://dgcsc.org/goldprices.xml"
+
     opener = urllib.FancyURLopener()
     f = opener.open(_URL)
     feed = f.read()
-    return feed
+    return feed, currencycode
 
 
-def parseXML(xml):
+def parseXML(xml, currencycode):
     xmldoc = minidom.parseString(xml)
     for node in xmldoc.firstChild.childNodes:
         if node.attributes['currencycode'].value == currencycode:
@@ -23,5 +26,5 @@ def parseXML(xml):
 
 
 if __name__ == "__main__":
-    f = auth()
-    print "%.1f" % float(parseXML(f))
+    f, currencycode = auth()
+    print "%.1f" % float(parseXML(f, currencycode))
