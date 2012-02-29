@@ -46,7 +46,8 @@ def readmail(feed, maxlen):
 #		print ' ${color}more...'
 
 def refresh_count(newcount = None):
-    filename = os.path.dirname(__file__) + "/gmail_parser.log"
+    path = os.path.abspath(os.path.dirname(sys.argv[0]))
+    filename = path + "/gmail_parser.log"
 
     today = datetime.date.today()
     new_line = str(today) + " " + str(newcount)
