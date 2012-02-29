@@ -10,10 +10,8 @@
 # published by the Free Software Foundation.
 # ======================================================================
 
-import sys
 import urllib             # For BasicHTTPAuthentication
 from xml.dom import minidom
-import re
 
 currencycode = "HRK"
 
