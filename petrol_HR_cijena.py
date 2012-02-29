@@ -26,22 +26,22 @@ def getChildByAttribute(node, attribute, value):
 
 def parseXML(xml, currencycode):
     xmldoc = minidom.parseString(xml)
-    slovenia = getChildByAttribute(xmldoc.firstChild, 'label', 'Slovenia')
+    slovenia = getChildByAttribute(xmldoc.firstChild, 'label', 'Croatia')
     f95 = getChildByAttribute(slovenia, 'type', '95')
     priceType = getChildByAttribute(f95, 'type', 'normal')
     price = getChildByAttribute(priceType, 'type', 'price')
     return price.firstChild.toxml()
 
-def cijena_EUR(xml, currencycode):
+def cijena_HRK(xml, currencycode):
     return float(parseXML(xml, currencycode))
 
-def cijena_HRK(eur):
-    return (eur * EUR_2_HRK.getEUR_2_HRK())
+def cijena_EUR(hrk):
+    return (hrk / EUR_2_HRK.getEUR_2_HRK())
 
 if __name__ == "__main__":
     xml, currencycode = auth()
-    eur = cijena_EUR(xml, currencycode)
-    if currencycode == "EUR":
-        print "%.3f" % eur
+    hrk = cijena_HRK(xml, currencycode)
+    if currencycode == "HRK":
+        print "%.3f" % hrk
     else:
-        print "%.3f" % cijena_HRK(eur)
+        print "%.3f" % cijena_EUR(hrk)
